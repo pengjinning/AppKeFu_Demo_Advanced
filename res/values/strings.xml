@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AppKeFuDemoAdvanced</string>
+    <string name="menu_settings">Settings</string>
+    <string name="chat_admin">咨询admin</string>
+    <string name="chat_kefu1">咨询kefu1</string>
+    <string name="chat_kefu2">咨询kefu2</string>
+    <string name="chat_admin_online">咨询admin(在线)</string>
+    <string name="chat_kefu1_online">咨询kefu1(在线)</string>
+    <string name="chat_kefu2_online">咨询kefu2(在线)</string>
+    <string name="chat_admin_offline">咨询admin(离线)</string>
+    <string name="chat_kefu1_offline">咨询kefu1(离线)</string>
+    <string name="chat_kefu2_offline">咨询kefu2(离线)</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="logining">登录中</string>
+
+</resources>
