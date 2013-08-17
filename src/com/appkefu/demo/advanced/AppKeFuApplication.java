@@ -16,7 +16,7 @@ public class AppKeFuApplication extends Application {
 	public AppKeFuApplication(){
 		
 	}
-	
+	 
 	@Override
 	public void onCreate() {
 		super.onCreate();

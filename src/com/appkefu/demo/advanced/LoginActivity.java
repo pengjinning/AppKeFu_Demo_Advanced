@@ -22,7 +22,7 @@ public class LoginActivity extends Activity {
 	private XmppFacade mXmppFacade;
 	private AsyncTask<XmppFacade,Void,Boolean> mLoginTask;
 	private boolean mBinded = false;
-
+  
 	/*
 	 * 此为用户唯一标识，用于与您的用户体系相对接，比如可以设为 用户的用户名或ID
 	 * 默认为空

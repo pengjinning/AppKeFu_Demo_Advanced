@@ -16,11 +16,24 @@
 
 package com.appkefu.demo.advanced;
 
+import java.io.IOException;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.appkefu.demo.advanced.R;
 import com.appkefu.lib.ChatViewActivity;
 import com.appkefu.lib.service.UsernameAndKefu;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
@@ -36,15 +49,12 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	private static final String TAG = MainActivity.class.getSimpleName();
-	private static final int LOGIN_REQUEST_CODE = 1;
-	
+	private static final int 	LOGIN_REQUEST_CODE = 1;
 	private static final String SERIAL_KEY = "com.appkefu.lib.username.serialize";
-
-
+ 
 	private Button chatAdmin;
-
 	private AppKeFuApplication app;
-	
+	 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,7 +72,8 @@ public class MainActivity extends Activity {
 		super.onStart();
 		Log.d(TAG, "onStart");
 		
-		if(!app.isConnected()){
+		if(!app.isConnected())
+		{
 			Log.d(TAG, "start login");
 			Intent login = new Intent(this, LoginActivity.class);
 			startActivityForResult(login, LOGIN_REQUEST_CODE);
@@ -71,7 +82,6 @@ public class MainActivity extends Activity {
 		{
 			Log.d(TAG, "already logged in");
 		}
-
 	}
 	
 	@Override
@@ -162,6 +172,82 @@ public class MainActivity extends Activity {
 		intent.putExtras(mbundle);
 			
 		startActivity(intent);	
+		
+		//getRobotThread();
     }
 
+	public void getRobotThread()
+	{
+		final Handler handler = new Handler()
+		{			
+			public void handleMessage(Message msg) 
+			{				
+				if(msg.what == 1)
+				{
+					Log.d(TAG, "msg.what == 1");
+					
+					//onLoad();
+				}				
+			}			
+		};
+		
+		new Thread() 
+		{
+			public void run() 
+			{
+				Message msg = new Message();			
+				getRobotAnswer();
+				
+				msg.what = 1; 
+				msg.obj = null; 
+								
+				handler.sendMessage(msg);
+			}
+		}.start();
+	}
+	
+	public void getRobotAnswer()
+	{
+	
+		String url = "http://appkefu.com/AppKeFu/admin/index.php/faq/robot?appkey=6f8103225b6ca0cfec048ecc8702dbce&q=%E9%97%AE%E9%A2%981";
+		Log.d(TAG, url);
+		HttpGet httpRequest = new HttpGet(url);
+		
+		try {
+			HttpResponse httpResponse = new DefaultHttpClient().execute(httpRequest);
+			
+			if(httpResponse.getStatusLine().getStatusCode() == 200)    
+	         {   
+	            String strResult = EntityUtils.toString(httpResponse.getEntity());  
+	            System.out.println(strResult);   
+	            
+	           
+	         }   
+	         else   
+	         {   
+	            System.out.println("Error Response: "+httpResponse.getStatusLine().toString());   
+	         }   			
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

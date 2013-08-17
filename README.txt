@@ -1,5 +1,7 @@
 使用说明：
 
+详细开发指南：http://appkefu.com/AppKeFu/tutorial-android.html
+
 1. 在 AndroidManifest.xml 的 <application></application> 中添加
 
    <activity
